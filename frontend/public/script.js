@@ -30,10 +30,15 @@ function formComponent() {
 
             <label for="intro">Introduction</label>
             <textarea id="intro" name="intro" rows="6"></textarea>
-            <button>Send</button>
+            <button>Clear</button>
+            <button>Save changes</button>
         </form>
     `
 }
+
+// event listener on save button
+
+
 
 
 function loadEvent() {
@@ -41,6 +46,25 @@ function loadEvent() {
     rootElement.innerHTML = pageHeader();
 
     rootElement.insertAdjacentHTML("beforeend", formComponent());
+
+    const formElement = document.getElementById('form');
+    formElement.addEventListener('submit', event => {
+        event.preventDefault();
+
+
+        // fomrElement parameterkent megadva osszegyujti az osszes infot(key-value parokat csinal beloluk)
+        const formData = new FormData(formElement)
+        // for (const pair of formData) {
+        //     console.log(pair)
+        // }
+
+
+        fetch("/", { method: 'POST', body: formData})
+            .then(async serverResponse => {
+                console.log(serverResponse.status);
+                console.log(await serverResponse.json());
+            })
+    })
 }
 
 window.addEventListener("load", loadEvent)
