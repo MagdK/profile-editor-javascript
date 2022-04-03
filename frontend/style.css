@@ -34,3 +34,8 @@ select {
 }
 
 /* RESET OVER */
+
+body {
+	font-family: 'Lora', serif;
+	font-family: 'Poppins', sans-serif;
+}

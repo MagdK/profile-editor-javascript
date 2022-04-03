@@ -2,6 +2,7 @@ function pageHeader() {
     return `
         <header>
             <h1>Edit profile</h1>
+            <div class="separator"></div>
         </header>
     `
 }
@@ -10,28 +11,38 @@ function pageHeader() {
 function formComponent() { 
     return `
         <form id="form">
-            <label for="first-name">First name</label>
-            <input type="text" id="first-name" name="first-name" placeholder="First name">
+            <fieldset>
+                <legend>Personal details</legend>
 
-            <label for="last-name">Last name</label>
-            <input type="text" id="last-name" name="last-name" placeholder="Last name">
+                <label for="first-name">First name</label>
+                <input type="text" id="first-name" name="first-name" placeholder="First name">
 
-            <label for="last-name">Country</label>
-            <input type="text" id="country" name="country" placeholder="country">
+                <label for="last-name">Last name</label>
+                <input type="text" id="last-name" name="last-name" placeholder="Last name">
 
-            <label for="zip">Zip code</label>
-            <input type="text" id="zip" name="zip" placeholder="Zip code">
+                <label for="intro">Introduction</label>
+                <textarea id="intro" name="intro" rows="6"></textarea>
 
-            <label for="city">City</label>
-            <input type="text" id="city" name="city" placeholder="City">
+                <label for="picture">Upload a profile image</label>
+                <input type="file" name="picture">
 
-            <label for="street">Street name and house number</label>
-            <input type="text" id="street" name="street" placeholder="Street name">
+                <legend>Address details</legend>
 
-            <label for="intro">Introduction</label>
-            <textarea id="intro" name="intro" rows="6"></textarea>
-            <button>Clear</button>
-            <button>Save changes</button>
+                <label for="country">Country</label>
+                <input type="text" id="country" name="country" placeholder="country">
+
+                <label for="zip">Zip code</label>
+                <input type="text" id="zip" name="zip" placeholder="Zip code">
+
+                <label for="city">City</label>
+                <input type="text" id="city" name="city" placeholder="City">
+
+                <label for="street">Street name and house number</label>
+                <input type="text" id="street" name="street" placeholder="Street name">
+
+                <button>Clear</button>
+                <button>Save changes</button>
+            </fieldset>
         </form>
     `
 }
