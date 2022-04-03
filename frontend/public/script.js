@@ -11,7 +11,7 @@ function pageHeader() {
 function formComponent() { 
     return `
         <form id="form">
-            <fieldset>
+            <fieldset class="personal-details">
                 <legend>Personal details</legend>
 
                 <label for="first-name">First name</label>
@@ -25,11 +25,12 @@ function formComponent() {
 
                 <label for="picture">Upload a profile image</label>
                 <input type="file" name="picture">
-
+            </fieldset>
+            <fieldset class="address-details">
                 <legend>Address details</legend>
 
                 <label for="country">Country</label>
-                <input type="text" id="country" name="country" placeholder="country">
+                <input type="text" id="country" name="country" placeholder="Country">
 
                 <label for="zip">Zip code</label>
                 <input type="text" id="zip" name="zip" placeholder="Zip code">
