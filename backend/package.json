@@ -1,0 +1,23 @@
+{
+  "name": "profile-editor-javascript",
+  "version": "1.0.0",
+  "description": "No starter code is provided. Start from scratch!",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MagdK/profile-editor-javascript.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MagdK/profile-editor-javascript/issues"
+  },
+  "homepage": "https://github.com/MagdK/profile-editor-javascript#readme",
+  "dependencies": {
+    "express": "^4.17.3"
+  }
+}
