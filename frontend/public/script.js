@@ -1,3 +1,5 @@
+const e = require("express");
+
 function pageHeader() {
     return `
         <header>
@@ -74,17 +76,24 @@ function loadEvent() {
         formData.append("City", e.target.querySelector(`textarea[name="city"]`).value);
         formData.append("Street name and house number", e.target.querySelector(`textarea[name="street"]`).value);
         
-        
+        const fetchSettings = {
+            method: "POST",
+            body: formData
+        };
 
-
-
-
-        fetch("/", { method: 'POST', body: formData})
-            .then(async serverResponse => {
-                console.log(serverResponse.status);
-                console.log(await serverResponse.json());
+        fetch("/", fetchSettings)
+            .then(data => {
+                if(data.status === 200) {
+                    e.target.outerHTML = "done"
+                    console.dir(data);
+                }
             })
-    })
-}
+            .catch(error => {
+                e.target.outerHTML = "Error"
+                console.dir(error);
+            })
+
+    });
+};
 
 window.addEventListener("load", loadEvent)
