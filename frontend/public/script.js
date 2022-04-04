@@ -63,12 +63,20 @@ function loadEvent() {
     formElement.addEventListener('submit', event => {
         event.preventDefault();
 
+        // formElement parameterkent megadva osszegyujti az osszes infot(key-value parokat csinal beloluk)
+        const formData = new FormData(formElement);
+        formData.append("First name", e.target.querySelector(`input[name="first-name"]`).value);
+        formData.append("Last name", e.target.querySelector(`input[name="last-name"]`).value);
+        formData.append("Introduction", e.target.querySelector(`textarea[name="intro"]`).value);
+        formData.append("Picture", e.target.querySelector(`textarea[name="picture"]`).files[0]);
+        formData.append("Country", e.target.querySelector(`textarea[name="counrty"]`).value);
+        formData.append("Zip", e.target.querySelector(`textarea[name="zip"]`).value);
+        formData.append("City", e.target.querySelector(`textarea[name="city"]`).value);
+        formData.append("Street name and house number", e.target.querySelector(`textarea[name="street"]`).value);
+        
+        
 
-        // fomrElement parameterkent megadva osszegyujti az osszes infot(key-value parokat csinal beloluk)
-        const formData = new FormData(formElement)
-        // for (const pair of formData) {
-        //     console.log(pair)
-        // }
+
 
 
         fetch("/", { method: 'POST', body: formData})
