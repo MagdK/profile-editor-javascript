@@ -6,18 +6,17 @@ const app = express();
 
 const dataLocation = path.join(`${__dirname}/../frontend/data/`);
 
-
 // Igy szolgaljuk ki az index.html-t
 function getFunction(request, response){
     response.sendFile(path.join(`${__dirname}/../frontend/index.html`));
 }
-app.get("/", getFunction);
 
 app.use(fileUpload);
 
+app.get("/", getFunction);
+
 // Az alabbi sor kiszolgalja  a frontend/public konyvtarbol a fajlokat
 app.use("/pub", express.static(`${__dirname}/../frontend/public`));
-
 
 // // Minden ami az upload folderben van, azt teszi ez a sor elerhetove. De csak a pontos url-t megadva eri el a bongeszo
 app.use("/upload", express.static(`${__dirname}/../frontend/upload`));
