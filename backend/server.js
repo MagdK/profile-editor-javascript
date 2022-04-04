@@ -24,6 +24,18 @@ app.use("/upload", express.static(`${__dirname}/../frontend/upload`));
 
 const uploads = path.join(`${__dirname}/../frontend/upload/`);
 
+let jsonData = [];
+try {
+    let data = fs.readFileSync(`${dataLocation}data.json`, error => {
+        if (error) {
+            console.log(error);
+        }
+    });
+    jsonData = JSON.parse(data);
+} catch (error) {
+    console.log(error);
+}
+
 //az első elemnek ugyanannak kell lennie mint a fetchnél a script.js-ben ("/")
 //req jön a frontend oldalról, res a válasz a backendről
 app.post("/", (req, res) => {
