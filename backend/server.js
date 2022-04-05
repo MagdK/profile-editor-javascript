@@ -2,39 +2,46 @@ const express  = require("express");
 const fileUpload = require("express-fileupload");
 const fs = require("fs");
 const path = require("path");
-const app = express();
 
-const dataLocation = path.join(`${__dirname}/../frontend/data/`);
+const publicFolder = path.join(`${__dirname}/../frontend/public/`);
+const uploadsFolder = path.join(`${__dirname}/../frontend/upload/`);
+const dataFolder = path.join(`${__dirname}/../frontend/data/`);
 
-// Igy szolgaljuk ki az index.html-t
-function getFunction(request, response){
-    response.sendFile(path.join(`${__dirname}/../frontend/index.html`));
-}
-
-app.use(fileUpload);
-
-app.get("/", getFunction);
-
-// Az alabbi sor kiszolgalja  a frontend/public konyvtarbol a fajlokat
-app.use("/pub", express.static(`${__dirname}/../frontend/public`));
-
-// // Minden ami az upload folderben van, azt teszi ez a sor elerhetove. De csak a pontos url-t megadva eri el a bongeszo
-app.use("/upload", express.static(`${__dirname}/../frontend/upload`));
-
-
-const uploads = path.join(`${__dirname}/../frontend/upload/`);
-
+// Create and load the initial database state
 let jsonData = [];
 try {
-    let data = fs.readFileSync(`${dataLocation}data.json`, error => {
+    let data = fs.readFileSync(`${dataFolder}data.json`, error => {
         if (error) {
             console.log(error);
         }
     });
     jsonData = JSON.parse(data);
 } catch (error) {
-    console.log(error);
+    fs.writeFile(`${dataFolder}data.json`, JSON.stringify(jsonData), (error) => {
+        if (error) {
+            console.log(error);
+        }
+    });
 }
+
+// Define the WEB application: middlewares and routes
+const app = express();
+// Logs every request path
+app.use((req, res, next) => {
+    console.log(`${req.method} ${req.path}`)
+    next()
+    console.log('Request served with ', res.statusCode)
+});
+// Parses form data and files from the request body
+app.use(fileUpload());
+// Az alabbi sor kiszolgalja  a frontend/public konyvtarbol a fajlokat
+app.use("/pub", express.static(publicFolder));
+// Minden ami az upload folderben van, azt teszi ez a sor elerhetove. De csak a pontos url-t megadva eri el a bongeszo
+app.use("/upload", express.static(uploadsFolder));
+
+app.get("/", (request, response) => {
+    response.sendFile(path.join(`${__dirname}/../frontend/public/index.html`));
+});
 
 //az első elemnek ugyanannak kell lennie mint a fetchnél a script.js-ben ("/")
 //req jön a frontend oldalról, res a válasz a backendről
@@ -43,7 +50,7 @@ app.post("/", (req, res) => {
     const picture = req.files.picture;
     const answer = {};
     if (picture) {
-        picture.mv(uploads + picture.name, error => {
+        picture.mv(uploadsFolder + picture.name, error => {
             return res.status(500).send(error);
         });
     }
@@ -57,13 +64,12 @@ app.post("/", (req, res) => {
     formData.image_name = picture.name;
     jsonData.push(formData);
 
-    fs.writeFile(`${dataLocation}data.json`, JSON.stringify(jsonData), (error) => {
+    fs.writeFile(`${dataFolder}data.json`, JSON.stringify(jsonData), (error) => {
         if (error) {
             console.log(error);
         }
     });
 });
-
 
 const port = 9000;
 const ipAddress = `http://127.0.0.1:${port}`;
