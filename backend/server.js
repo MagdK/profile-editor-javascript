@@ -45,20 +45,20 @@ app.get("/", (request, response) => {
 //az első elemnek ugyanannak kell lennie mint a fetchnél a script.js-ben ("/")
 //req jön a frontend oldalról, res a válasz a backendről
 app.post("/", (req, res) => {
-    // Upload image
     const answer = {};
-    // if (picture) {
-    //     picture.mv(uploadsFolder + picture.name, error => {
-    //         return res.status(500).send(error);
-    //     });
-    // }
-    // answer.pictureName  = picture.name;
+    const picture = req.files.picture;
 
-    //network/response nál látszik ez
-    res.send(answer)
+    // Move the picture to the uploads dir
+    if (picture) {
+        picture.mv(uploadsFolder + picture.name, error => {
+            return res.status(500).send(error);
+        });
+        answer.pictureName  = picture.name;
+    }
 
     // Upload data from form
     const formData = req.body;
+    console.log(typeof req.body);
     formData.image_name = picture.name;
     jsonData.push(formData);
 
@@ -67,6 +67,9 @@ app.post("/", (req, res) => {
             console.log(error);
         }
     });
+
+    //network/response-nál látszik ez
+    res.send(answer)
 });
 
 const port = 9000;
