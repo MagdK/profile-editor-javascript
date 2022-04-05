@@ -38,7 +38,7 @@ const formComponent =
             <input type="text" id="city" name="city" placeholder="City">
 
             <label for="street">Street name and house number</label>
-            <input type="text" id="street" name="street" placeholder="Street name">
+            <input type="text" id="street" name="street" placeholder="Street name and house number">
 
             <div class="btn-wrapper">
                 <button class="btn-secondary">Clear</button>

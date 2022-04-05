@@ -103,17 +103,19 @@ label {
 
 input {
 	height: 50px;
+  line-height: 50px;
 }
 
 textarea {
   height: 115px;
+  line-height: 24px;
+  padding-top: 10px;
 }
 
 input,
 textarea {
   border: 2px solid #030303;
   font-size: 16px;
-  line-height: 50px;
   background: #FFFFFF;
   box-sizing: border-box;
   padding-left: 16px;
@@ -121,13 +123,19 @@ textarea {
   color: #030303;
 }
 
+input::placeholder {
+  line-height: 50px;
+}
+
+textarea::placeholder {
+  line-height: 24px;
+}
+
 input::placeholder,
 textarea::placeholder {
   font-weight: 400;
   font-size: 16px;
-  line-height: 50px;
   color: #868484;
-  padding-left: 16px;
 }
 
 input:focus::placeholder,
