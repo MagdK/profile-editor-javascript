@@ -13,8 +13,7 @@ const formComponent =
         <fieldset class="personal-details">
             <legend>Personal details</legend>
             
-            <label for="picture" id="img-upload-btn" hidden>Upload a profile image</label>
-            <input type="file" name="picture">
+            <input type="file" name="picture" class="custom-file-input">
 
             <label for="first-name">First name</label>
             <input type="text" id="first-name" name="first-name" placeholder="First name">
@@ -23,7 +22,7 @@ const formComponent =
             <input type="text" id="last-name" name="last-name" placeholder="Last name">
 
             <label for="intro">Introduction</label>
-            <textarea id="intro" name="intro" rows="6" placeholder="Please tell us about yourself..."></textarea>
+            <textarea id="intro" name="intro" rows="6" placeholder="Tell us about yourself..."></textarea>
         </fieldset>
         <fieldset class="address-details">
             <legend>Address details</legend>
@@ -60,14 +59,14 @@ function loadEvent() {
 
         // formElement parameterkent megadva osszegyujti az osszes infot(key-value parokat csinal beloluk)
         const formData = new FormData();
-        formData.append("First name", e.target.querySelector(`input[name="first-name"]`).value);
-        formData.append("Last name", e.target.querySelector(`input[name="last-name"]`).value);
-        formData.append("Introduction", e.target.querySelector(`textarea[name="intro"]`).value);
-        formData.append("Picture", e.target.querySelector(`input[name="picture"]`).files[0]);
-        formData.append("Country", e.target.querySelector(`input[name="country"]`).value);
-        formData.append("Zip", e.target.querySelector(`input[name="zip"]`).value);
-        formData.append("City", e.target.querySelector(`input[name="city"]`).value);
-        formData.append("Street name and house number", e.target.querySelector(`input[name="street"]`).value);
+        formData.append("first_name", e.target.querySelector(`input[name="first-name"]`).value);
+        formData.append("last_name", e.target.querySelector(`input[name="last-name"]`).value);
+        formData.append("introduction", e.target.querySelector(`textarea[name="intro"]`).value);
+        formData.append("picture", e.target.querySelector(`input[name="picture"]`).files[0]);
+        formData.append("country", e.target.querySelector(`input[name="country"]`).value);
+        formData.append("zip", e.target.querySelector(`input[name="zip"]`).value);
+        formData.append("city", e.target.querySelector(`input[name="city"]`).value);
+        formData.append("address", e.target.querySelector(`input[name="street"]`).value);
         
         const fetchSettings = {
             method: "POST",

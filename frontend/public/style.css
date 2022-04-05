@@ -104,12 +104,13 @@ label {
 input {
 	height: 50px;
   line-height: 50px;
+  padding: 0 16px;
 }
 
 textarea {
   height: 115px;
   line-height: 24px;
-  padding-top: 10px;
+  padding: 10px 16px 10px 16px;
 }
 
 input,
@@ -118,7 +119,6 @@ textarea {
   font-size: 16px;
   background: #FFFFFF;
   box-sizing: border-box;
-  padding-left: 16px;
   margin-bottom: 24px;
   color: #030303;
 }
@@ -143,11 +143,19 @@ textarea:focus::placeholder {
   color: transparent;
 }
 
+textarea:focus {
+  padding: 10px 16px;
+}
+
+input:focus {
+  padding: 0 16px;
+}
+
 textarea:focus, 
 input:focus {
   color: #030303;
   letter-spacing: 1.2px;
-  padding-left: 16px;
+  border: 2px solid #828282;
 }
 
 div .btn-wrapper {
@@ -171,4 +179,38 @@ div .btn-wrapper {
   color: #030303;
   text-transform: uppercase;
   letter-spacing: 1px;
+}
+
+input.custom-file-input {
+  background-color: #fff;
+  width: 160px;
+  height: 160px;
+}
+
+input.custom-file-input::-webkit-file-upload-button {
+  visibility: hidden;
+}
+
+input.custom-file-input::before {
+  content: 'Upload a photo';
+  display: inline-block;
+  background: linear-gradient(top, #f9f9f9, #e3e3e3);
+  outline: none;
+  white-space: nowrap;
+  -webkit-user-select: none;
+  cursor: pointer;
+  font-weight: 400;
+  font-size: 12px;
+  text-align: center;
+  height: 160px;
+  width: 160px;
+  text-decoration: underline;
+}
+
+input.custom-file-input:hover::before {
+  border-color: black;
+}
+
+input.custom-file-input:active::before {
+  background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
 }
