@@ -46,14 +46,13 @@ app.get("/", (request, response) => {
 //req jön a frontend oldalról, res a válasz a backendről
 app.post("/", (req, res) => {
     // Upload image
-    const picture = req.files.picture;
     const answer = {};
-    if (picture) {
-        picture.mv(uploadsFolder + picture.name, error => {
-            return res.status(500).send(error);
-        });
-    }
-    answer.pictureName  = picture.name;
+    // if (picture) {
+    //     picture.mv(uploadsFolder + picture.name, error => {
+    //         return res.status(500).send(error);
+    //     });
+    // }
+    // answer.pictureName  = picture.name;
 
     //network/response nál látszik ez
     res.send(answer)

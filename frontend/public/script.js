@@ -12,6 +12,9 @@ const formComponent =
     <form id="form">
         <fieldset class="personal-details">
             <legend>Personal details</legend>
+            
+            <label for="picture" id="img-upload-btn" hidden>Upload a profile image</label>
+            <input type="file" name="picture">
 
             <label for="first-name">First name</label>
             <input type="text" id="first-name" name="first-name" placeholder="First name">
@@ -20,10 +23,7 @@ const formComponent =
             <input type="text" id="last-name" name="last-name" placeholder="Last name">
 
             <label for="intro">Introduction</label>
-            <textarea id="intro" name="intro" rows="6"></textarea>
-
-            <label for="picture">Upload a profile image</label>
-            <input type="file" name="picture">
+            <textarea id="intro" name="intro" rows="6" placeholder="Please tell us about yourself..."></textarea>
         </fieldset>
         <fieldset class="address-details">
             <legend>Address details</legend>
@@ -41,8 +41,8 @@ const formComponent =
             <input type="text" id="street" name="street" placeholder="Street name">
 
             <div class="btn-wrapper">
-                <button>Clear</button>
-                <button>Save changes</button>
+                <button class="btn-secondary">Clear</button>
+                <button class="btn-primary">Save changes</button>
             </div>
         </fieldset>
     </form>
@@ -77,12 +77,12 @@ function loadEvent() {
         fetch("/", fetchSettings)
             .then(async data => {
                 if(data.status === 200) {
-                    e.target.outerHTML = "done"
+                    e.target.outerHTML = "Your changes have been saved."
                     console.dir(data);
                 }
             })
             .catch(error => {
-                e.target.outerHTML = "Error"
+                e.target.outerHTML = "Something went very wrong!"
                 console.dir(error);
             })
 

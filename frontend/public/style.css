@@ -8,29 +8,29 @@
 	font-family: inherit;
 }
 a {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 a img {
-    border: none;
+  border: none;
 }
   
 button,
 a {
-    cursor: pointer;
-    color: inherit;
+  cursor: pointer;
+  color: inherit;
 }
   
 textarea {
-    resize: none;
+  resize: none;
 }
   
 button,
 textarea,
 select,
 input {
-    appearance: none !important;
-    border-radius: 0;
+  appearance: none !important;
+  border-radius: 0;
 }
 
 /* Reset over */
@@ -38,16 +38,16 @@ input {
 
 body {
 	font-family: 'Poppins', sans-serif;
+  background-color: #fefefe;
 }
 
-section {
+#root {
   width: 720px;
-  margin: 0 auto;
   background: #FFFFFF;
   box-shadow: 0px 2px 15px 3px rgba(0, 0, 0, 0.15);
   border-radius: 5px;
   padding: 48px;
-  margin-top: 48px;
+  margin: 48px auto;
 }
 
 fieldset {
@@ -77,6 +77,8 @@ legend {
 	width: 724px;
 }
 
+.personal-details input,
+.personal-details textarea, 
 .address-details input {
 	width: 624px;
 }
@@ -96,39 +98,48 @@ label {
   font-size: 12px;
   line-height: 12px;
   padding-bottom: 8px;
+  width: 624px;
 }
 
 input {
-	width: 288px;
 	height: 50px;
-	background: #FFFFFF;
-	border: 2px solid #030303;
-	box-sizing: border-box;
-  margin-bottom: 24px;
 }
 
-::placeholder {
+textarea {
+  height: 115px;
+}
+
+input,
+textarea {
+  border: 2px solid #030303;
+  font-size: 16px;
+  line-height: 50px;
+  background: #FFFFFF;
+  box-sizing: border-box;
+  padding-left: 16px;
+  margin-bottom: 24px;
+  color: #030303;
+}
+
+input::placeholder,
+textarea::placeholder {
   font-weight: 400;
   font-size: 16px;
-  line-height: 24px;
+  line-height: 50px;
   color: #868484;
   padding-left: 16px;
 }
 
-textarea {
-    height: 115px;
-    background-color: #fff;
-    background: #FFFFFF;
-	  border: 2px solid #030303;
-	  box-sizing: border-box;
-    margin-bottom: 24px;
+input:focus::placeholder,
+textarea:focus::placeholder {
+  color: transparent;
 }
 
 textarea:focus, 
 input:focus {
-    color: #030303;
-    letter-spacing: 1.2px;
-    padding-left: 16px;
+  color: #030303;
+  letter-spacing: 1.2px;
+  padding-left: 16px;
 }
 
 div .btn-wrapper {
