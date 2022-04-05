@@ -40,8 +40,10 @@ const formComponent =
             <label for="street">Street name and house number</label>
             <input type="text" id="street" name="street" placeholder="Street name">
 
-            <button>Clear</button>
-            <button>Save changes</button>
+            <div class="btn-wrapper">
+                <button>Clear</button>
+                <button>Save changes</button>
+            </div>
         </fieldset>
     </form>
 `;
@@ -53,19 +55,19 @@ function loadEvent() {
     rootElement.insertAdjacentHTML("beforeend", formComponent);
 
     const formElement = document.getElementById('form');
-    formElement.addEventListener('submit', event => {
-        event.preventDefault();
+    formElement.addEventListener('submit', e => {
+        e.preventDefault();
 
         // formElement parameterkent megadva osszegyujti az osszes infot(key-value parokat csinal beloluk)
         const formData = new FormData();
         formData.append("First name", e.target.querySelector(`input[name="first-name"]`).value);
         formData.append("Last name", e.target.querySelector(`input[name="last-name"]`).value);
         formData.append("Introduction", e.target.querySelector(`textarea[name="intro"]`).value);
-        formData.append("Picture", e.target.querySelector(`textarea[name="picture"]`).files[0]);
-        formData.append("Country", e.target.querySelector(`textarea[name="counrty"]`).value);
-        formData.append("Zip", e.target.querySelector(`textarea[name="zip"]`).value);
-        formData.append("City", e.target.querySelector(`textarea[name="city"]`).value);
-        formData.append("Street name and house number", e.target.querySelector(`textarea[name="street"]`).value);
+        formData.append("Picture", e.target.querySelector(`input[name="picture"]`).files[0]);
+        formData.append("Country", e.target.querySelector(`input[name="country"]`).value);
+        formData.append("Zip", e.target.querySelector(`input[name="zip"]`).value);
+        formData.append("City", e.target.querySelector(`input[name="city"]`).value);
+        formData.append("Street name and house number", e.target.querySelector(`input[name="street"]`).value);
         
         const fetchSettings = {
             method: "POST",

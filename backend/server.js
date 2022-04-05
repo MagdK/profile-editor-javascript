@@ -28,9 +28,8 @@ try {
 const app = express();
 // Logs every request path
 app.use((req, res, next) => {
-    console.log(`${req.method} ${req.path}`)
     next()
-    console.log('Request served with ', res.statusCode)
+    console.log(`${req.method} ${req.path} => ${res.statusCode}`)
 });
 // Parses form data and files from the request body
 app.use(fileUpload());
@@ -40,7 +39,7 @@ app.use("/pub", express.static(publicFolder));
 app.use("/upload", express.static(uploadsFolder));
 
 app.get("/", (request, response) => {
-    response.sendFile(path.join(`${__dirname}/../frontend/public/index.html`));
+    response.sendFile(path.join(`${__dirname}/../frontend/index.html`));
 });
 
 //az első elemnek ugyanannak kell lennie mint a fetchnél a script.js-ben ("/")
