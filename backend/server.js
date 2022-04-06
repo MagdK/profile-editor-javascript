@@ -1,3 +1,4 @@
+const { json } = require("express");
 const express  = require("express");
 const fileUpload = require("express-fileupload");
 const fs = require("fs");
@@ -10,14 +11,14 @@ const dataFolder = path.join(`${__dirname}/../frontend/data/`);
 // Create and load the initial database state
 let jsonData = [];
 try {
-    let data = fs.readFileSync(`${dataFolder}data.json`, error => {
+    let data = fs.readFileSync(`${dataFolder}profile.json`, error => {
         if (error) {
             console.log(error);
         }
     });
     jsonData = JSON.parse(data);
 } catch (error) {
-    fs.writeFile(`${dataFolder}data.json`, JSON.stringify(jsonData), (error) => {
+    fs.writeFile(`${dataFolder}profile.json`, JSON.stringify(jsonData), (error) => {
         if (error) {
             console.log(error);
         }
@@ -44,7 +45,19 @@ app.get("/", (request, response) => {
 
 //az első elemnek ugyanannak kell lennie mint a fetchnél a script.js-ben ("/")
 //req jön a frontend oldalról, res a válasz a backendről
-app.post("/", (req, res) => {
+app.get("/profile", (req, res) => {
+    res.json(jsonData[0]);
+})
+app.delete("/profile", (req, res) => {
+    let jsonData = [];
+    fs.writeFile(`${dataFolder}profile.json`, JSON.stringify(jsonData), (error) => {
+        if (error) {
+            console.log(error);
+        }
+    });
+    res.json({deleted: true});
+});
+app.post("/profile", (req, res) => {
     const answer = {};
     const picture = req.files.picture;
 
@@ -62,7 +75,7 @@ app.post("/", (req, res) => {
     formData.image_name = picture.name;
     jsonData.push(formData);
 
-    fs.writeFile(`${dataFolder}data.json`, JSON.stringify(jsonData), (error) => {
+    fs.writeFile(`${dataFolder}profile.json`, JSON.stringify(jsonData), (error) => {
         if (error) {
             console.log(error);
         }
