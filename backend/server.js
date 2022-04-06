@@ -46,7 +46,7 @@ app.get("/", (request, response) => {
 //az első elemnek ugyanannak kell lennie mint a fetchnél a script.js-ben ("/")
 //req jön a frontend oldalról, res a válasz a backendről
 app.get("/profile", (req, res) => {
-    res.json(jsonData[0]);
+    res.json(jsonData[0] || {});
 })
 app.delete("/profile", (req, res) => {
     let jsonData = [];

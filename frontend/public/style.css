@@ -183,8 +183,8 @@ div .btn-wrapper {
 
 input.custom-file-input {
   background-color: #fff;
-  width: 160px;
-  height: 160px;
+  width: 120px;
+  height: 120px;
 }
 
 input.custom-file-input::-webkit-file-upload-button {

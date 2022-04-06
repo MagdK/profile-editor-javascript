@@ -16,28 +16,28 @@ const formComponent = (profile) => {
             <input type="file" name="picture" class="custom-file-input">
 
             <label for="first-name">First name</label>
-            <input type="text" id="first-name" name="first-name" placeholder="First name" value="${profile.first_name}">
+            <input type="text" id="first-name" name="first-name" placeholder="First name" value="${profile.first_name || ""}">
 
             <label for="last-name">Last name</label>
-            <input type="text" id="last-name" name="last-name" placeholder="Last name" value="${profile.last_name}">
+            <input type="text" id="last-name" name="last-name" placeholder="Last name" value="${profile.last_name || ""}">
 
             <label for="intro">Introduction</label>
-            <textarea id="intro" name="intro" rows="6" placeholder="Tell us about yourself...">${profile.intro}</textarea>
+            <textarea id="intro" name="intro" rows="6" placeholder="Tell us about yourself...">${profile.intro || ""}</textarea>
         </fieldset>
         <fieldset class="address-details">
             <legend>Address details</legend>
 
             <label for="country">Country</label>
-            <input type="text" id="country" name="country" placeholder="Country" value="${profile.country}">
+            <input type="text" id="country" name="country" placeholder="Country" value="${profile.country || ""}">
 
             <label for="zip">Zip code</label>
-            <input type="text" id="zip" name="zip" placeholder="Zip code" value="${profile.zip}">
+            <input type="text" id="zip" name="zip" placeholder="Zip code" value="${profile.zip || ""}">
 
             <label for="city">City</label>
-            <input type="text" id="city" name="city" placeholder="City" value="${profile.city}">
+            <input type="text" id="city" name="city" placeholder="City" value="${profile.city || ""}">
 
             <label for="address">Address</label>
-            <input type="text" id="street" name="address" placeholder="Address" value="${profile.address}">
+            <input type="text" id="street" name="address" placeholder="Address" value="${profile.address || ""}">
 
             <div class="btn-wrapper">
                 <button type="reset" class="btn-secondary">Delete</button>
