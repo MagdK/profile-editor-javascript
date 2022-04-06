@@ -22,7 +22,7 @@ const formComponent = (profile) => {
             <input type="text" id="last-name" name="last-name" placeholder="Last name" value="${profile.last_name}">
 
             <label for="intro">Introduction</label>
-            <textarea id="intro" name="intro" rows="6" placeholder="Tell us about yourself..." value="${profile.intro}"></textarea>
+            <textarea id="intro" name="intro" rows="6" placeholder="Tell us about yourself...">${profile.intro}</textarea>
         </fieldset>
         <fieldset class="address-details">
             <legend>Address details</legend>
