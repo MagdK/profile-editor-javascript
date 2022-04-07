@@ -81,15 +81,25 @@ async function loadEvent() {
             .then(async data => {
                 if(data.status === 200) {
                     console.dir(await data.json());
-                    alert("elmentve")
+                    alert("Your data has been saved")
                 }
             })
             .catch(error => {
-                e.target.innerHTML = "Something went very wrong!"
+                e.target.innerHTML = "Something went very wrong"
                 console.dir(error);
             })
-
     });
+
+    
+
+  /*   function hideDeleteButton() {
+        if(data.json === []) {
+            $(".btn-secondary").hide();
+        } else {
+            $(".btn-secondary").show(); 
+        }
+    }
+    hideDeleteButton(); */
 };
 
 window.addEventListener("load", loadEvent)

@@ -1,4 +1,4 @@
-const { json } = require("express");
+
 const express  = require("express");
 const fileUpload = require("express-fileupload");
 const fs = require("fs");
@@ -47,7 +47,7 @@ app.get("/", (request, response) => {
 //req jön a frontend oldalról, res a válasz a backendről
 app.get("/profile", (req, res) => {
     res.json(jsonData[0] || {});
-})
+});
 app.delete("/profile", (req, res) => {
     let jsonData = [];
     fs.writeFile(`${dataFolder}profile.json`, JSON.stringify(jsonData), (error) => {
@@ -84,6 +84,10 @@ app.post("/profile", (req, res) => {
     //network/response-nál látszik ez
     res.send(answer)
 });
+
+app.get("/profile", (req, res) => {
+    req.json(jsonData[0] || {});
+})
 
 const port = 9000;
 const ipAddress = `http://127.0.0.1:${port}`;
