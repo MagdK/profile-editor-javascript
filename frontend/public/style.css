@@ -43,7 +43,6 @@ body {
 
 #root {
   width: 720px;
-  background: #FFFFFF;
   box-shadow: 0px 2px 15px 3px rgba(0, 0, 0, 0.15);
   border-radius: 5px;
   padding: 48px;
@@ -114,7 +113,8 @@ textarea {
 }
 
 input,
-textarea {
+textarea,
+.picture-wrap {
   border: 2px solid #030303;
   font-size: 16px;
   background: #FFFFFF;
@@ -181,34 +181,56 @@ div .btn-wrapper {
   letter-spacing: 1px;
 }
 
-input.custom-file-input {
-  background-color: #fff;
+
+/* Image uplaod wrap */
+
+.picture-wrap {
+  position: relative;
   width: 120px;
   height: 120px;
+  background: transparent;
+}
+
+.picture-wrap input, .picture-wrap img {
+  position: absolute;
+  display: block;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  cursor: pointer;
+}
+
+input.custom-file-input {
+  background-color: transparent;
+}
+
+img#preview.picture-preview-hidden {
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -5;
 }
 
 input.custom-file-input::-webkit-file-upload-button {
   visibility: hidden;
 }
-
-input.custom-file-input::before {
-  content: 'Upload a photo';
-  display: inline-block;
-  background: linear-gradient(top, #f9f9f9, #e3e3e3);
-  outline: none;
-  white-space: nowrap;
-  -webkit-user-select: none;
-  cursor: pointer;
-  font-weight: 400;
-  font-size: 12px;
-  text-align: center;
-  height: 160px;
-  width: 160px;
-  text-decoration: underline;
+input.custom-file-input.fileSelected::before {
+  content: ' ';
 }
 
-input.custom-file-input:hover::before {
-  border-color: black;
+input.custom-file-input::before {
+  line-height: 120px;
+  text-align: center;
+  display: block;
+  content: 'Choose file';
+  background: linear-gradient(top, #f9f9f9, #e3e3e3);
+  font-weight: 400;
+  font-size: 12px;
+  text-decoration: underline;
 }
 
 input.custom-file-input:active::before {

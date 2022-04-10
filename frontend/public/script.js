@@ -13,7 +13,10 @@ const formComponent = (profile) => {
         <fieldset class="personal-details">
             <legend>Personal details</legend>
             
-            <input type="file" name="picture" class="custom-file-input">
+            <div class="picture-wrap">
+                <input type="file" name="picture" class="custom-file-input">
+                <img  id="preview" class="picture-preview-hidden" />
+            </div>
 
             <label for="first-name">First name</label>
             <input type="text" id="first-name" name="first-name" placeholder="First name" value="${profile.first_name || ""}">
@@ -63,10 +66,11 @@ async function loadEvent() {
 
         // formElement parameterkent megadva osszegyujti az osszes infot(key-value parokat csinal beloluk)
         const formData = new FormData();
+        formData.append("picture", e.target.querySelector(`input[name="picture"]`).files[0]);
+
         formData.append("first_name", e.target.querySelector(`input[name="first-name"]`).value);
         formData.append("last_name", e.target.querySelector(`input[name="last-name"]`).value);
         formData.append("intro", e.target.querySelector(`textarea[name="intro"]`).value);
-        formData.append("picture", e.target.querySelector(`input[name="picture"]`).files[0]);
         formData.append("country", e.target.querySelector(`input[name="country"]`).value);
         formData.append("zip", e.target.querySelector(`input[name="zip"]`).value);
         formData.append("city", e.target.querySelector(`input[name="city"]`).value);
@@ -90,16 +94,20 @@ async function loadEvent() {
             })
     });
 
+    const imageFileInput = document.querySelector(`input[name="picture"]`);
+    imageFileInput.addEventListener('change', e => {
+        imageFileInput.classList.add("fileSelected");
+        
+        let selectedImg = e.target.files[0];
+
+        let fileReader = new FileReader();
+        fileReader.addEventListener("load", (e) => { 
+            document.getElementById("preview").src = e.target.result 
+        });
+        fileReader.readAsDataURL(selectedImg);
+    });
     
 
-  /*   function hideDeleteButton() {
-        if(data.json === []) {
-            $(".btn-secondary").hide();
-        } else {
-            $(".btn-secondary").show(); 
-        }
-    }
-    hideDeleteButton(); */
 };
 
 window.addEventListener("load", loadEvent)
