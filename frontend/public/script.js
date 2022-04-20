@@ -1,10 +1,10 @@
 const pageHeader =
-     `
-        <header>
-            <h1>Edit profile</h1>
-            <div class="separator"></div>
-        </header>
     `
+     <header>
+        <h1>Edit profile</h1>
+        <div class="separator"></div>
+    </header>
+    `;
 
 
 const formComponent = (profile) => {
@@ -97,7 +97,7 @@ async function loadEvent() {
     const imageFileInput = document.querySelector(`input[name="picture"]`);
     imageFileInput.addEventListener('change', e => {
         imageFileInput.classList.add("fileSelected");
-        
+
         let selectedImg = e.target.files[0];
 
         let fileReader = new FileReader();
@@ -107,6 +107,24 @@ async function loadEvent() {
         fileReader.readAsDataURL(selectedImg);
     });
     
+    /* // REMOVE LINK - COPY FROM PIZZA PROJECT
+    const removeLinks = document.querySelectorAll(".remove-link");
+    for(let removeLink of removeLinks) {
+        removeLink.addEventListener("click", async e => {
+            e.preventDefault(); // Do not follow the link <a href="">
+
+            if(!confirm("Are you sure you want to remove this item?")) {
+                return // Cancel button clicked
+            }
+            // Ok button clicked - request to server
+            const deleteUrl = e.target.href
+            const response = await getData(deleteUrl, "delete");
+        
+            if(response.deleted === true) {
+                e.target.parentNode.remove();
+            }
+        });
+    } */
 
 };
 

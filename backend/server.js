@@ -1,4 +1,3 @@
-
 const express  = require("express");
 const fileUpload = require("express-fileupload");
 const fs = require("fs");
@@ -34,8 +33,10 @@ app.use((req, res, next) => {
 });
 // Parses form data and files from the request body
 app.use(fileUpload());
+
 // Az alabbi sor kiszolgalja  a frontend/public konyvtarbol a fajlokat
 app.use("/pub", express.static(publicFolder));
+
 // Minden ami az upload folderben van, azt teszi ez a sor elerhetove. De csak a pontos url-t megadva eri el a bongeszo
 app.use("/upload", express.static(uploadsFolder));
 
@@ -48,6 +49,7 @@ app.get("/", (request, response) => {
 app.get("/profile", (req, res) => {
     res.json(jsonData[0] || {});
 });
+
 app.delete("/profile", (req, res) => {
     let jsonData = [];
     fs.writeFile(`${dataFolder}profile.json`, JSON.stringify(jsonData), (error) => {
@@ -57,6 +59,7 @@ app.delete("/profile", (req, res) => {
     });
     res.json({deleted: true});
 });
+
 app.post("/profile", (req, res) => {
     const answer = {};
     const picture = req.files.picture;
@@ -83,6 +86,31 @@ app.post("/profile", (req, res) => {
 
     //network/response-nál látszik ez
     res.send(answer)
+});
+
+// DELETE MENU ITEM - COPY FROM PIZZA PROJECT
+// DELETE http://127.0.0.1:9000/pizzas/Mexican
+app.delete("/pizzas/:name", (req, res) => {
+	fs.readFile(`${absolutePathPizzasJSON}/pizzas.json`, (error, data) => {
+		if(error) {
+			console.log(error);
+			res.send("Error reading pizzas file.");
+		} else {
+			const pizzas = JSON.parse(data);
+			console.log(req.params.name);
+			const filteredPizza = pizzas.filter(pizzaItem => pizzaItem.name !== req.params.name);
+
+			// wrtieFile metodus - meg kell adni az eleresi utvonalat, plusz string-ge kell alakitani, hogy a fajlba bele tudjuk irni
+			fs.writeFile(`${absolutePathPizzasJSON}/pizzas.json`, JSON.stringify(filteredPizza), error => {
+				if(error) {
+					console.log(error);
+					res.send("Error writing pizza file.");
+				}
+			})
+			// itt kuldjuk vissza a valaszuzenetet
+			res.send({"deleted": true});
+		}
+	})
 });
 
 app.get("/profile", (req, res) => {
