@@ -43,7 +43,7 @@ const formComponent = (profile) => {
             <input type="text" id="street" name="address" placeholder="Address" value="${profile.address || ""}">
 
             <div class="btn-wrapper">
-                <button type="reset" class="btn-secondary">Delete</button>
+                <button class="btn-secondary delete-user">Delete</button>
                 <button class="btn-primary">Save changes</button>
             </div>
         </fieldset>
@@ -107,24 +107,27 @@ async function loadEvent() {
         fileReader.readAsDataURL(selectedImg);
     });
     
-    /* // REMOVE LINK - COPY FROM PIZZA PROJECT
-    const removeLinks = document.querySelectorAll(".remove-link");
-    for(let removeLink of removeLinks) {
-        removeLink.addEventListener("click", async e => {
-            e.preventDefault(); // Do not follow the link <a href="">
+    // Delete user 
+    const deleteUser = document.querySelector(".delete-user");
 
-            if(!confirm("Are you sure you want to remove this item?")) {
-                return // Cancel button clicked
-            }
-            // Ok button clicked - request to server
-            const deleteUrl = e.target.href
-            const response = await getData(deleteUrl, "delete");
+    deleteUser.addEventListener("click", async e => {
+        e.preventDefault(); // Do not follow the link <a href="">
+
+        if(!confirm("Are you sure you want to delete user?")) {
+            return // Cancel button clicked
+        }
         
-            if(response.deleted === true) {
-                e.target.parentNode.remove();
-            }
-        });
-    } */
+        // Ok button clicked - request to server
+        const response = await fetch("/profile", {method:"DELETE"});
+        const responseJson = await response.json();
+
+        if(responseJson.deleted === true) {
+            const form = document.getElementById("form");
+            const img = document.getElementById("preview");
+            form.reset();
+            img.reset();
+        }
+    });
 
 };
 

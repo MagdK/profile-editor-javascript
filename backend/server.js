@@ -4,7 +4,7 @@ const fs = require("fs");
 const path = require("path");
 
 const publicFolder = path.join(`${__dirname}/../frontend/public/`);
-const uploadsFolder = path.join(`${__dirname}/../frontend/upload/`);
+const uploadFolder = path.join(`${__dirname}/../frontend/upload/`);
 const dataFolder = path.join(`${__dirname}/../frontend/data/`);
 
 // Create and load the initial database state
@@ -26,6 +26,8 @@ try {
 
 // Define the WEB application: middlewares and routes
 const app = express();
+
+// USE REQUESTS
 // Logs every request path
 app.use((req, res, next) => {
     next()
@@ -38,8 +40,10 @@ app.use(fileUpload());
 app.use("/pub", express.static(publicFolder));
 
 // Minden ami az upload folderben van, azt teszi ez a sor elerhetove. De csak a pontos url-t megadva eri el a bongeszo
-app.use("/upload", express.static(uploadsFolder));
+app.use("/upload", express.static(uploadFolder));
 
+
+// GET REQUESTS
 app.get("/", (request, response) => {
     response.sendFile(path.join(`${__dirname}/../frontend/index.html`));
 });
@@ -50,23 +54,15 @@ app.get("/profile", (req, res) => {
     res.json(jsonData[0] || {});
 });
 
-app.delete("/profile", (req, res) => {
-    let jsonData = [];
-    fs.writeFile(`${dataFolder}profile.json`, JSON.stringify(jsonData), (error) => {
-        if (error) {
-            console.log(error);
-        }
-    });
-    res.json({deleted: true});
-});
 
+// POST REQUESTS
 app.post("/profile", (req, res) => {
     const answer = {};
     const picture = req.files.picture;
 
-    // Move the picture to the uploads dir
+    // Move the picture to the upload dir
     if (picture) {
-        picture.mv(uploadsFolder + picture.name, error => {
+        picture.mv(uploadFolder + picture.name, error => {
             return res.status(500).send(error);
         });
         answer.pictureName  = picture.name;
@@ -88,36 +84,21 @@ app.post("/profile", (req, res) => {
     res.send(answer)
 });
 
-// DELETE MENU ITEM - COPY FROM PIZZA PROJECT
-// DELETE http://127.0.0.1:9000/pizzas/Mexican
-app.delete("/pizzas/:name", (req, res) => {
-	fs.readFile(`${absolutePathPizzasJSON}/pizzas.json`, (error, data) => {
-		if(error) {
-			console.log(error);
-			res.send("Error reading pizzas file.");
-		} else {
-			const pizzas = JSON.parse(data);
-			console.log(req.params.name);
-			const filteredPizza = pizzas.filter(pizzaItem => pizzaItem.name !== req.params.name);
 
-			// wrtieFile metodus - meg kell adni az eleresi utvonalat, plusz string-ge kell alakitani, hogy a fajlba bele tudjuk irni
-			fs.writeFile(`${absolutePathPizzasJSON}/pizzas.json`, JSON.stringify(filteredPizza), error => {
-				if(error) {
-					console.log(error);
-					res.send("Error writing pizza file.");
-				}
-			})
-			// itt kuldjuk vissza a valaszuzenetet
-			res.send({"deleted": true});
-		}
-	})
+// DELETE REQUESTS
+app.delete("/profile", (req, res) => {
+    jsonData = [];
+    fs.writeFile(`${dataFolder}profile.json`, JSON.stringify(jsonData), (error) => {
+        if (error) {
+            console.log(error);
+        }
+    });
+    res.json({deleted: true});
 });
 
-app.get("/profile", (req, res) => {
-    req.json(jsonData[0] || {});
-})
 
-const port = 9000;
+
+const port = 3000;
 const ipAddress = `http://127.0.0.1:${port}`;
 app.listen(port, () => {
     console.log(ipAddress)
