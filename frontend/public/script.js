@@ -125,7 +125,7 @@ async function loadEvent() {
             const form = document.getElementById("form");
             const img = document.getElementById("preview");
             form.reset();
-            img.removeAttribute('src');
+            img.setAttribute('src', '');
         }
        
     });
