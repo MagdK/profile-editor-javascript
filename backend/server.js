@@ -84,6 +84,15 @@ app.post("/profile", (req, res) => {
     res.send(answer)
 });
 
+ // image delete ???
+        // if (fs.existsSync('./docs/deleteme.txt')) {
+        //     fs.unlink('./docs/deleteme.txt', (err) => {
+        //         if(err) {
+        //             console.log(err)
+        //         }
+        //         console.log('file deleted');
+        //     })
+        // }
 
 // DELETE REQUESTS
 app.delete("/profile", (req, res) => {
