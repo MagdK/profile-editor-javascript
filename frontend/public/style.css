@@ -202,6 +202,10 @@ div .btn-wrapper {
   cursor: pointer;
 }
 
+.picture-wrap img img[src=""] {
+  display: none;
+}
+
 input.custom-file-input {
   background-color: transparent;
 }

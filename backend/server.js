@@ -86,12 +86,23 @@ app.post("/profile", (req, res) => {
 
 // DELETE REQUESTS
 app.delete("/profile", (req, res) => {
+    for (const profile of jsonData) {
+        try {
+            fs.unlinkSync(path.join(uploadFolder, profile.image_name))
+            //file removed
+        } catch(err) {
+            console.error(err)
+        }
+    }
+
     jsonData = [];
+    
     fs.writeFile(`${dataFolder}profile.json`, JSON.stringify(jsonData), (error) => {
         if (error) {
             console.log(error);
         }
     });
+
     res.json({deleted: true});
 });
 
