@@ -3,9 +3,9 @@ const fileUpload = require("express-fileupload");
 const fs = require("fs");
 const path = require("path");
 
-const publicFolder = path.join(`${__dirname}/../public/public/`);
-const uploadFolder = path.join(`${__dirname}/../public/upload/`);
-const dataFolder = path.join(`${__dirname}/../public/data/`);
+const publicFolder = path.join(`${__dirname}/public/public/`);
+const uploadFolder = path.join(`${__dirname}/public/upload/`);
+const dataFolder = path.join(`${__dirname}/public/data/`);
 
 // Create and load the initial database state
 let jsonData = [];
@@ -45,7 +45,7 @@ app.use("/upload", express.static(uploadFolder));
 
 // GET REQUESTS
 app.get("/", (request, response) => {
-    response.sendFile(path.join(`${__dirname}/../public/index.html`));
+    response.sendFile(path.join(`${__dirname}/public/index.html`));
 });
 
 //az első elemnek ugyanannak kell lennie mint a fetchnél a script.js-ben ("/")
