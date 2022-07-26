@@ -35,18 +35,115 @@ input {
 
 /* Reset over */
 
+@media only screen and (min-width: 720px) {
 
-body {
-	font-family: 'Poppins', sans-serif;
-  background-color: #ccc;
+  #root {
+    width: 720px;
+    box-shadow: 0px 2px 15px 3px rgba(0, 0, 0, 0.15);
+    border-radius: 5px;
+    padding: 48px;
+    margin: 48px auto;
+    background-color: #fff;
+  }
+
+  .address-details {
+    width: 724px;
+  }
+  
+  .personal-details input,
+  .personal-details textarea, 
+  .address-details input {
+    width: 624px;
+  }
+
+  label {
+    display: block;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 12px;
+    padding-bottom: 8px;
+    width: 624px;
+  }
+
+  div .btn-wrapper {
+    width: 624px;
+    text-align: right;
+  }
+  
+  .btn-primary {
+    width: 170px;
+    height: 44px;
+    background: #030303;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  
+  .btn-secondary {
+    width: 98px;
+    height: 44px;
+    background: #fff;
+    color: #030303;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
 }
 
-#root {
-  width: 720px;
-  box-shadow: 0px 2px 15px 3px rgba(0, 0, 0, 0.15);
-  border-radius: 5px;
-  padding: 48px;
-  margin: 48px auto;
+@media only screen and (max-width: 720px) {
+
+  body {
+    background-color: #fefefe;
+  }
+
+  #root {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 24px;
+    background-color: #fff;
+  }
+  
+  label {
+    display: block;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 12px;
+    padding-bottom: 8px;
+    max-width: 624px;
+  }
+
+  input, 
+  textarea {
+    width: 100%;
+  
+  }  
+  
+  div .btn-wrapper {
+    max-width: 624px;
+    text-align: right;
+  }
+  
+  .btn-primary {
+    width: 170px;
+    height: 44px;
+    background: #030303;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  
+  .btn-secondary {
+    width: 98px;
+    height: 44px;
+    background: #fff;
+    color: #030303;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #fefefe;
 }
 
 fieldset {
@@ -72,16 +169,6 @@ legend {
   margin-bottom: 48px;
 }
 
-.address-details {
-	width: 724px;
-}
-
-.personal-details input,
-.personal-details textarea, 
-.address-details input {
-	width: 624px;
-}
-
 legend {
 	font-weight: 700;
 	font-size: 24px;
@@ -89,15 +176,6 @@ legend {
 	color: #030303;
 	margin-bottom: 24px;
 	margin-top: 48px;
-}
-
-label {
-  display: block;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 12px;
-  padding-bottom: 8px;
-  width: 624px;
 }
 
 input {
@@ -156,29 +234,6 @@ input:focus {
   color: #030303;
   letter-spacing: 1.2px;
   border: 2px solid #828282;
-}
-
-div .btn-wrapper {
-  width: 624px;
-  text-align: right;
-}
-
-.btn-primary {
-  width: 170px;
-  height: 44px;
-  background: #030303;
-  color: #fff;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-.btn-secondary {
-  width: 98px;
-  height: 44px;
-  background: #fff;
-  color: #030303;
-  text-transform: uppercase;
-  letter-spacing: 1px;
 }
 
 
