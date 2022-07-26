@@ -3,9 +3,9 @@ const fileUpload = require("express-fileupload");
 const fs = require("fs");
 const path = require("path");
 
-const publicFolder = path.join(`${__dirname}/../frontend/public/`);
-const uploadFolder = path.join(`${__dirname}/../frontend/upload/`);
-const dataFolder = path.join(`${__dirname}/../frontend/data/`);
+const publicFolder = path.join(`${__dirname}/../public/public/`);
+const uploadFolder = path.join(`${__dirname}/../public/upload/`);
+const dataFolder = path.join(`${__dirname}/../public/data/`);
 
 // Create and load the initial database state
 let jsonData = [];
@@ -36,7 +36,7 @@ app.use((req, res, next) => {
 // Parses form data and files from the request body
 app.use(fileUpload());
 
-// Az alabbi sor kiszolgalja  a frontend/public konyvtarbol a fajlokat
+//The code below serves the files in public folder
 app.use("/pub", express.static(publicFolder));
 
 // Minden ami az upload folderben van, azt teszi ez a sor elerhetove. De csak a pontos url-t megadva eri el a bongeszo
@@ -45,7 +45,7 @@ app.use("/upload", express.static(uploadFolder));
 
 // GET REQUESTS
 app.get("/", (request, response) => {
-    response.sendFile(path.join(`${__dirname}/../frontend/index.html`));
+    response.sendFile(path.join(`${__dirname}/../public/index.html`));
 });
 
 //az első elemnek ugyanannak kell lennie mint a fetchnél a script.js-ben ("/")
@@ -108,8 +108,20 @@ app.delete("/profile", (req, res) => {
 
 
 
-const port = 3000;
-const ipAddress = `http://127.0.0.1:${port}`;
-app.listen(port, () => {
-    console.log(ipAddress)
-});
+// const port = 3000;
+// const ipAddress = `http://127.0.0.1:${port}`;
+// app.listen(port, () => {
+//     console.log(ipAddress)
+// });
+
+const myLogger = function (req, res, next) {
+	console.log(req.path)
+	next()
+}
+
+app.use(myLogger)
+
+// statikus fajlok kiszolgalasa
+app.use(express.static('public'));
+
+app.listen(process.env.PORT || 3000);
